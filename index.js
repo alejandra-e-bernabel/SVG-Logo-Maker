@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const MaxLengthInputPrompt = require("inquirer-maxlength-input-prompt");
+const fs = require("fs");
 
 inquirer.registerPrompt('maxlength-input', MaxLengthInputPrompt)
 
@@ -10,6 +11,11 @@ class Shape {
     constructor (color, text) {
         this.color = color;
         this.text = text;
+    }
+
+    render() {
+        //string that is then passed to writeToFile
+        return "This is the sgv shape";
     }
 }
 
@@ -29,6 +35,11 @@ class Triangle extends Shape {
     constructor () {
         super (color, text);
     }
+}
+
+//TODO: use WRITEFILE to create SVG logo
+function writeToFile(fileName, data) {
+    fs.writeFile("logo.sgv", data, (err) => {if (err) console.error(err)});
 }
 
 //Inquire user responses
@@ -63,7 +74,6 @@ function init() {
         })
 }
 
-//TODO: use WRITEFILE to create SVG logo
 
 //initialize function
 init();
