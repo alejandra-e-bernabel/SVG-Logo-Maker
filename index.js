@@ -8,45 +8,71 @@ inquirer.registerPrompt('maxlength-input', MaxLengthInputPrompt)
 //TODO: create shape parent class, then extend class with
 //circle, rectangle, triangle
 
+class SVG {
+    constructor() {
+        //takes in no arguments, empty constructor
+    }
+    //renders a 300 x 200 svg element
+    render () {
+        return "<svg version=\"1.1\" width=\"300\" height=\"200\" xmlns=\"http://www.w3.org/2000/svg\"></svg>";
+    }
+
+    setText(text, textColor) {
+        return '<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg"><text x="150" y="125" font-family="monospace" font-size="50" text-anchor="middle" fill="' + textColor + '">' + text + '</text></svg>';
+    }
+}
+
 class Shape {
-    constructor (color, text) {
+    constructor(color, text) {
         this.color = color;
         this.text = text;
     }
 
     render() {
         //string that is then passed to writeToFile
-        return "This is the sgv shape";
+        return "This is the svg shape";
     }
 }
 
 class Circle extends Shape {
-    constructor (color, text) {
-        super (color, text);
+    constructor(color, text) {
+        super(color, text);
+    }
+
+    render() {
+        return "<circle cx=\"150\" cy=\"100\" r=\"80\" fill=\"" + this.color + "\"/>";
     }
 }
 
 class Rectangle extends Shape {
-    constructor (color, text) {
-        super (color, text);
+    constructor(color, text) {
+        super(color, text);
+    }
+
+    render() {
+        return "<rect x=\"90\" y=\"40\" width=\"120\" height=\"120\" fill=\"" + this.color + "\"/>";
     }
 }
 
 class Triangle extends Shape {
-    constructor (color, text) {
-        super (color, text);
+    constructor(color, text) {
+        super(color, text);
+    }
+
+    render() {
+        return "<polygon points=\"150, 18 244, 182 56, 182\" fill=\"" + this.color + "\"/>"
     }
 }
 
 //TODO: use WRITEFILE to create SVG logo
-function writeToFile(fileName, data) {
-    fs.writeFile("logo.sgv", data, (err) => {if (err) console.error(err)});
+function writeToFile(data) {
+    fs.writeFile("logo.svg", data, (err) => { if (err) console.error(err) });
 }
 
 //Inquire user responses
 function init() {
     inquirer
-        .prompt ([
+        .prompt([
             //text
             {
                 type: "maxlength-input",
@@ -54,11 +80,17 @@ function init() {
                 maxLength: 3,
                 name: "text"
             },
-            //color
+            //shape color
             {
                 type: "name",
-                message: "What color would you like your logo to be? Please enter a color keyword or a hexadecimal value\n",
+                message: "Shape color: What color would you like your logo to be? Please enter a color keyword or a hexadecimal value\n",
                 name: "color"
+            },
+            //text color
+            {
+                type: "name",
+                message: "Text color: What color would you like the text inside your logo to be? Please enter a color keyword or a hexadecimal value\n",
+                name: "textColor"
             },
             //shape
             {
@@ -68,15 +100,17 @@ function init() {
                 name: "shape"
             }
         ])
-        .then (data => {
-            console.log ("The shape is " + data.shape);
-            console.log ("The color is " + data.color);
-            console.log ("The text is " + data.text);
+        .then(data => {
+            console.log("The shape is " + data.shape);
+            console.log("The color is " + data.color);
+            console.log("The text is " + data.text);
+
+            data.text = data.text.toUpperCase();
 
             if (isColor(data.color)) {
                 console.log("The input value is a color");
-            } else  {
-                console.log ("The input value is not a color");
+            } else {
+                console.log("The input value is not a color");
             }
 
             let shape = "";
@@ -84,16 +118,29 @@ function init() {
                 case "Rectangle":
                     shape = new Rectangle(data.color, data.text);
                     break;
-                
-                case "Triangle": 
+
+                case "Triangle":
                     shape = new Triangle(data.color, data.text);
                     break;
-                
+
                 case "Circle":
                     shape = new Circle(data.color, data.text);
                     break;
-        
+
             }
+
+            const svg = new SVG;
+            //svg document general syntax
+            const renderedString = svg.setText(data.text, data.textColor);
+            //svg shape-specific string
+            const shapeString = shape.render();
+
+            console.log(renderedString);
+            console.log(shapeString);
+
+            const combinedString = renderedString.replace("svg\">","svg\">" + shapeString); 
+
+            writeToFile(combinedString);
 
         })
 }
