@@ -6,7 +6,32 @@ inquirer.registerPrompt('maxlength-input', MaxLengthInputPrompt)
 //TODO: create shape parent class, then extend class with
 //circle, rectangle, triangle
 
-//TODO: Inquire user responses
+class Shape {
+    constructor (color, text) {
+        this.color = color;
+        this.text = text;
+    }
+}
+
+class Circle extends Shape {
+    constructor () {
+        super (color, text);
+    }
+}
+
+class Rectangle extends Shape {
+    constructor () {
+        super (color, text);
+    }
+}
+
+class Triangle extends Shape {
+    constructor () {
+        super (color, text);
+    }
+}
+
+//Inquire user responses
 function init() {
     inquirer
         .prompt ([
