@@ -108,16 +108,18 @@ function init() {
             }
         ])
         .then(data => {
-            console.log("The shape is " + data.shape);
-            console.log("The color is " + data.color);
-            console.log("The text is " + data.text);
-
             data.text = data.text.toUpperCase();
 
-            if (isColor(data.color)) {
-                console.log("The input value is a color");
-            } else {
-                console.log("The input value is not a color");
+            //in the case that the user does not enter a real shape color
+            if (!isColor(data.color)) {
+                console.log("\nThe input shape color is not a color. Color will default to aliceblue.\n");
+                data.color = "aliceblue";
+            }
+
+            //in the case that the user does not enter a real text color
+            if (!isColor(data.textColor)) {
+                console.log("\nThe input text color is not a color. Color will default to black.\n");
+                data.textColor = "black";
             }
 
             let shape = "";
@@ -133,7 +135,6 @@ function init() {
                 case "Circle":
                     shape = new Circle(data.color, data.text);
                     break;
-
             }
 
             const svg = new SVG;
@@ -142,12 +143,10 @@ function init() {
             //svg shape-specific string
             const shapeString = shape.render();
 
-            console.log(renderedString);
-            console.log(shapeString);
-
             const combinedString = renderedString.replace("svg\">","svg\">" + shapeString); 
 
             writeToFile(combinedString);
+            console.log("Generated logo.svg")
 
         })
 }
