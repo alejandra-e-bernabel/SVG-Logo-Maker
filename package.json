@@ -28,6 +28,7 @@
   "homepage": "https://github.com/alejandra-e-bernabel/SVG-Logo-Maker#readme",
   "dependencies": {
     "inquirer": "^8.2.4",
-    "inquirer-maxlength-input-prompt": "^1.0.2"
+    "inquirer-maxlength-input-prompt": "^1.0.2",
+    "is-color": "^1.0.2"
   }
 }

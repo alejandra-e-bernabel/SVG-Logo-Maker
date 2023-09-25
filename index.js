@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const MaxLengthInputPrompt = require("inquirer-maxlength-input-prompt");
 const fs = require("fs");
+const isColor = require("is-color");
 
 inquirer.registerPrompt('maxlength-input', MaxLengthInputPrompt)
 
@@ -20,19 +21,19 @@ class Shape {
 }
 
 class Circle extends Shape {
-    constructor () {
+    constructor (color, text) {
         super (color, text);
     }
 }
 
 class Rectangle extends Shape {
-    constructor () {
+    constructor (color, text) {
         super (color, text);
     }
 }
 
 class Triangle extends Shape {
-    constructor () {
+    constructor (color, text) {
         super (color, text);
     }
 }
@@ -71,6 +72,29 @@ function init() {
             console.log ("The shape is " + data.shape);
             console.log ("The color is " + data.color);
             console.log ("The text is " + data.text);
+
+            if (isColor(data.color)) {
+                console.log("The input value is a color");
+            } else  {
+                console.log ("The input value is not a color");
+            }
+
+            let shape = "";
+            switch (data.shape) {
+                case "Rectangle":
+                    shape = new Rectangle(data.color, data.text);
+                    break;
+                
+                case "Triangle": 
+                    shape = new Triangle(data.color, data.text);
+                    break;
+                
+                case "Circle":
+                    shape = new Circle(data.color, data.text);
+                    break;
+        
+            }
+
         })
 }
 
