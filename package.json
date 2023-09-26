@@ -29,6 +29,7 @@
   "dependencies": {
     "inquirer": "^8.2.4",
     "inquirer-maxlength-input-prompt": "^1.0.2",
-    "is-color": "^1.0.2"
+    "is-color": "^1.0.2",
+    "jest": "^29.7.0"
   }
 }
