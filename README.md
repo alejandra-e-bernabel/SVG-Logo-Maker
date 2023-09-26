@@ -1,6 +1,12 @@
 # SVG-Logo-Maker
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## Github Repo
+https://github.com/alejandra-e-bernabel/SVG-Logo-Maker
+
+## Video
+https://drive.google.com/file/d/1X9fxKqJ3UdLnkcniMwXkWC2CnhzZqVeS/view
+
 ## Description
 
 A Node.js command-line application that takes in user input to generate a logo and save it as an SVG file. The application prompts the user to select a color and shape, provide text for the logo, and save the generated SVG to a .svg file.
