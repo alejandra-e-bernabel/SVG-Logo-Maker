@@ -9,7 +9,7 @@ inquirer.registerPrompt('maxlength-input', MaxLengthInputPrompt)
 
 //Use WRITEFILE to create SVG logo
 function writeToFile(data) {
-    fs.writeFile("triangle.svg", data, (err) => { if (err) console.error(err) });
+    fs.writeFile("logo.svg", data, (err) => { if (err) console.error(err) });
 }
 
 //Inquire user responses

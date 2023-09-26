@@ -11,9 +11,9 @@ https://drive.google.com/file/d/1X9fxKqJ3UdLnkcniMwXkWC2CnhzZqVeS/view
 
 A Node.js command-line application that takes in user input to generate a logo and save it as an SVG file. The application prompts the user to select a color and shape, provide text for the logo, and save the generated SVG to a .svg file.
 
-![Circle Example](image.png)
-![Rectangle Example](image-1.png)
-![Triangle Example](image-2.png)
+![Circle Example](/Images/image.png)
+![Rectangle Example](/Images/image-1.png)
+![Triangle Example](/Images/image-2.png)
 
 ## Table of Contents
 
