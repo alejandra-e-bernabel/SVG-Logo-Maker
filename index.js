@@ -2,6 +2,7 @@ const inquirer = require("inquirer");
 const MaxLengthInputPrompt = require("inquirer-maxlength-input-prompt");
 const fs = require("fs");
 const isColor = require("is-color");
+const shapeClasses = require("./lib/shapes");
 
 inquirer.registerPrompt('maxlength-input', MaxLengthInputPrompt)
 
@@ -25,51 +26,51 @@ class SVG {
     }
 }
 
-class Shape {
-    constructor(color, text) {
-        this.color = color;
-        this.text = text;
-    }
+// class Shape {
+//     constructor(color, text) {
+//         this.color = color;
+//         this.text = text;
+//     }
 
-    render() {
-        //string that is then passed to writeToFile
-        return "This is the svg shape";
-    }
+//     render() {
+//         //string that is then passed to writeToFile
+//         return "This is the svg shape";
+//     }
 
-    setColor(color) {
-        this.color = color;
-    }
-}
+//     setColor(color) {
+//         this.color = color;
+//     }
+// }
 
-class Circle extends Shape {
-    constructor(color, text) {
-        super(color, text);
-    }
+// class Circle extends Shape {
+//     constructor(color, text) {
+//         super(color, text);
+//     }
 
-    render() {
-        return "<circle cx=\"150\" cy=\"100\" r=\"80\" fill=\"" + this.color + "\"/>";
-    }
-}
+//     render() {
+//         return "<circle cx=\"150\" cy=\"100\" r=\"80\" fill=\"" + this.color + "\"/>";
+//     }
+// }
 
-class Rectangle extends Shape {
-    constructor(color, text) {
-        super(color, text);
-    }
+// class Rectangle extends Shape {
+//     constructor(color, text) {
+//         super(color, text);
+//     }
 
-    render() {
-        return "<rect x=\"90\" y=\"40\" width=\"120\" height=\"120\" fill=\"" + this.color + "\"/>";
-    }
-}
+//     render() {
+//         return "<rect x=\"90\" y=\"40\" width=\"120\" height=\"120\" fill=\"" + this.color + "\"/>";
+//     }
+// }
 
-class Triangle extends Shape {
-    constructor(color, text) {
-        super(color, text);
-    }
+// class Triangle extends Shape {
+//     constructor(color, text) {
+//         super(color, text);
+//     }
 
-    render() {
-        return "<polygon points=\"150, 18 244, 182 56, 182\" fill=\"" + this.color + "\"/>"
-    }
-}
+//     render() {
+//         return "<polygon points=\"150, 18 244, 182 56, 182\" fill=\"" + this.color + "\"/>"
+//     }
+// }
 
 //TODO: use WRITEFILE to create SVG logo
 function writeToFile(data) {
@@ -125,15 +126,15 @@ function init() {
             let shape = "";
             switch (data.shape) {
                 case "Rectangle":
-                    shape = new Rectangle(data.color, data.text);
+                    shape = new shapeClasses.Rectangle(data.color, data.text);
                     break;
 
                 case "Triangle":
-                    shape = new Triangle(data.color, data.text);
+                    shape = new shapeClasses.Triangle(data.color, data.text);
                     break;
 
                 case "Circle":
-                    shape = new Circle(data.color, data.text);
+                    shape = new shapeClasses.Circle(data.color, data.text);
                     break;
             }
 
